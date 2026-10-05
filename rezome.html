@@ -52,7 +52,6 @@ body:after{
   transition:width .25s,height .25s,border-color .25s;mix-blend-mode:screen;
 }
 .cursor-ring.active{width:60px;height:60px;border-color:var(--lime)}
-#particles{position:fixed;inset:0;z-index:-1;pointer-events:none}
 .bg{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
 .shape{position:absolute;opacity:.2;filter:drop-shadow(0 0 18px rgba(185,255,0,.25))}
 .c{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#e4ff86,#527500 48%,#071000);animation:floatA 13s ease-in-out infinite}
@@ -709,7 +708,6 @@ html,body,body *,button,input,textarea,select,option,h1,h2,h3,h4,h5,h6,p,span,di
 
 <body>
 
-<canvas id="particles"></canvas>
 <nav class="motion-nav">
   <div class="motion-logo"><i></i><span>فرم رزومه</span></div>
   <div style="display:flex;align-items:center;gap:4px">
@@ -1100,31 +1098,6 @@ html,body,body *,button,input,textarea,select,option,h1,h2,h3,h4,h5,h6,p,span,di
       card.style.setProperty('--gy',`${(y+.5)*100}%`);
     });
   });
-
-  // Particle field
-  const canvas=document.getElementById('particles'), ctx=canvas.getContext('2d');
-  let w,h,pts=[];
-  const resize=()=>{w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)};
-  const init=()=>{pts=Array.from({length:Math.min(75,Math.floor(innerWidth/18))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.6+.4}))};
-  resize();init();addEventListener('resize',()=>{resize();init()});
-  function draw(){
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    for(const p of pts){
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>innerWidth)p.vx*=-1;
-      if(p.y<0||p.y>innerHeight)p.vy*=-1;
-      const dx=p.x-px,dy=p.y-py,d=Math.hypot(dx,dy);
-      const alpha=Math.max(.08,.38-d/500);
-      ctx.fillStyle=`rgba(22,79,102,${alpha})`;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-      if(d<145){
-        ctx.strokeStyle=`rgba(22,79,102,${.10*(1-d/145)})`;
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(px,py);ctx.stroke();
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
 })();
 </script>
 
