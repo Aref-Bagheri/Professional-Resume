@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="رزومه الکترونیک عارف باقری | طراحی گرافیک، تولید محتوا و ادمینی">
+<title>رزومه | عارف باقری</title>
+
+<style>
+@font-face{
+  font-family: 'Shabnam', sans-serif;
+  src:url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam.woff2') format('woff2');
+  font-weight:300 800;
+  font-display:swap;
+}
+:root{
+  --bg:#030507; --panel:rgba(10,16,20,.78); --panel2:rgba(14,23,28,.72);
+  --lime:#b9ff00; --lime2:#e3ff78; --white:#f7faf8; --text:#d9e1e1;
+  --muted:#849194; --cyan:#78f7ff; --purple:#a47cff;
+  --ease:cubic-bezier(.2,.75,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family: 'Shabnam', sans-serif;color:var(--text);
+  background:
+    radial-gradient(circle at var(--mx,50%) var(--my,20%),rgba(185,255,0,.09),transparent 20%),
+    radial-gradient(circle at 80% 70%,rgba(120,247,255,.045),transparent 25%),
+    #030507;
+  overflow-x:hidden; cursor:none;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-5;pointer-events:none;opacity:.22;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(to bottom,black,transparent 80%);
+}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:linear-gradient(transparent 50%,rgba(185,255,0,.018) 50%);
+  background-size:100% 5px;mix-blend-mode:screen;opacity:.22;
+}
+.cursor{
+  position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;
+  background:var(--lime);box-shadow:0 0 18px var(--lime),0 0 45px rgba(185,255,0,.4);
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+}
+.cursor-ring{
+  position:fixed;left:0;top:0;width:34px;height:34px;border:1px solid rgba(185,255,0,.6);
+  border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,border-color .25s;mix-blend-mode:screen;
+}
+.cursor-ring.active{width:60px;height:60px;border-color:var(--lime)}
+#particles{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.shape{position:absolute;opacity:.2;filter:drop-shadow(0 0 18px rgba(185,255,0,.25))}
+.c{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#e4ff86,#527500 48%,#071000);animation:floatA 13s ease-in-out infinite}
+.s{width:65px;height:65px;border-radius:18px;background:linear-gradient(145deg,#d9ff55,#172500);animation:floatB 17s ease-in-out infinite}
+.r{width:170px;height:40px;border-radius:50%;border:1px solid rgba(185,255,0,.5);box-shadow:0 0 35px rgba(185,255,0,.2);animation:floatC 15s ease-in-out infinite}
+.p1{top:8%;left:4%}.p2{top:28%;right:6%;animation-delay:-4s}.p3{top:54%;left:3%;animation-delay:-8s}
+.p4{top:76%;right:8%;animation-delay:-3s}.p5{top:88%;left:25%;animation-delay:-7s}.p6{top:14%;right:27%;animation-delay:-10s}
+@keyframes floatA{50%{transform:translate(80px,80px) rotate(180deg)}100%{transform:translate(-15px,20px) rotate(360deg)}}
+@keyframes floatB{50%{transform:translate(-75px,55px) rotate(150deg)}100%{transform:translate(30px,-30px) rotate(300deg)}}
+@keyframes floatC{50%{transform:translate(65px,-45px) rotate(-9deg)}100%{transform:translate(-35px,50px) rotate(8deg)}}
+
+.wrap{width:min(1240px,92%);margin:auto;padding:28px 0 70px}
+
+/* floating top navigation */
+.motion-nav{
+  position:sticky;top:16px;z-index:100;margin-bottom:22px;
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
+  padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:18px;
+  background:rgba(5,9,12,.62);backdrop-filter:blur(18px);
+  box-shadow:0 12px 40px rgba(0,0,0,.3);
+}
+.motion-logo{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--white)}
+.motion-logo i{width:28px;height:28px;border-radius:9px;background:var(--lime);box-shadow:0 0 18px rgba(185,255,0,.6);display:block}
+.motion-nav a{color:#9ba8aa;text-decoration:none;font-size:.75rem;padding:8px 11px;border-radius:10px;transition:.25s}
+.motion-nav a:hover{color:var(--lime);background:rgba(185,255,0,.07)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:scale(.55);opacity:.45}}
+
+.hero{
+  position:relative;min-height:475px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;
+  padding:36px;border-radius:32px;overflow:hidden;
+  background:linear-gradient(135deg,rgba(13,21,25,.94),rgba(3,7,9,.98));
+  border:1px solid rgba(185,255,0,.18);
+  box-shadow:0 35px 90px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.05);
+  isolation:isolate;
+}
+.hero:before{
+  content:"";position:absolute;inset:-40%;z-index:-1;
+  background:conic-gradient(from 0deg,transparent,rgba(185,255,0,.12),transparent 18%,rgba(120,247,255,.06),transparent 38%);
+  animation:spin 18s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 15% 20%,rgba(185,255,0,.08),transparent 22%),linear-gradient(120deg,transparent 60%,rgba(185,255,0,.04));
+}
+.hero-content,.profile{position:relative;z-index:2}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:99px;
+  color:var(--lime2);border:1px solid rgba(185,255,0,.28);background:rgba(185,255,0,.055);
+  box-shadow:0 0 20px rgba(185,255,0,.07);font-size:.78rem;font-weight:800;
+}
+.badge:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:pulse 1.5s infinite}
+h1{
+  font-size:clamp(3.2rem,8vw,6.8rem);line-height:.9;margin:25px 0 20px;color:var(--white);
+  letter-spacing:-4px;text-shadow:0 0 35px rgba(255,255,255,.08);
+}
+h1 .char{display:inline-block;animation:charIn .8s var(--ease) both}
+@keyframes charIn{from{opacity:0;transform:translateY(40px) rotate(8deg);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+h1:after{content:"";display:block;width:155px;height:5px;margin-top:22px;background:var(--lime);border-radius:99px;box-shadow:0 0 12px var(--lime),0 0 40px rgba(185,255,0,.35);animation:lineGrow 1.2s .8s var(--ease) both}
+@keyframes lineGrow{from{width:0;opacity:0}to{width:155px;opacity:1}}
+.hero p{max-width:650px;color:#a9b4b6;line-height:2.15;margin:0;font-size:1rem}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.meta-pill{padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#aab5b7;font-size:.72rem;background:rgba(255,255,255,.025)}
+.meta-pill b{color:var(--lime)}
+
+.profile{
+  min-height:390px;border-radius:28px;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  background:radial-gradient(circle at 50% 35%,rgba(185,255,0,.12),transparent 25%),linear-gradient(145deg,#111d21,#060b0e);
+  border:1px solid rgba(185,255,0,.22);overflow:hidden;
+}
+.profile:before,.profile:after{content:"";position:absolute;border:1px solid rgba(185,255,0,.23);border-radius:50%;animation:orbit 11s linear infinite}
+.profile:before{width:230px;height:230px;box-shadow:0 0 45px rgba(185,255,0,.08)}
+.profile:after{width:330px;height:150px;transform:rotate(-25deg);animation-duration:16s;animation-direction:reverse}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.avatar-frame{position:relative;z-index:3;padding:7px;border-radius:38px;background:linear-gradient(145deg,var(--lime),#304500);box-shadow:0 0 25px rgba(185,255,0,.45);animation:avatarFloat 4s ease-in-out infinite}
+@keyframes avatarFloat{50%{transform:translateY(-9px) rotate(2deg);box-shadow:0 0 42px rgba(185,255,0,.65)}}
+.avatar{width:135px;height:135px;border-radius:31px;overflow:hidden;display:grid;place-items:center;background:#caff39;color:#071000;font-size:2.8rem;font-weight:900}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.profile strong{position:relative;z-index:3;margin-top:23px;color:var(--white);font-size:1rem}
+.profile span{position:relative;z-index:3;color:var(--muted);font-size:.78rem;margin-top:5px}
+.scan-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--lime),transparent);box-shadow:0 0 12px var(--lime);animation:scan 4s ease-in-out infinite}
+@keyframes scan{0%{top:8%;opacity:0}15%,70%{opacity:1}100%{top:92%;opacity:0}}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+.card{
+  position:relative;overflow:hidden;padding:25px;border-radius:25px;
+  background:linear-gradient(145deg,rgba(15,25,30,.84),rgba(5,10,13,.94));
+  border:1px solid rgba(255,255,255,.07);box-shadow:0 25px 60px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.04);
+  transform-style:preserve-3d;transition:transform .15s ease,border-color .3s,box-shadow .3s;
+}
+.card.reveal{opacity:0;transform:translateY(55px) scale(.96)}
+.card.reveal.visible{opacity:1;transform:translateY(0) scale(1);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.card.full{grid-column:1/-1}
+.card:after{
+  content:"";position:absolute;inset:-1px;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(185,255,0,.12),transparent 24%);
+  opacity:0;transition:opacity .3s
+}
+.card:hover:after{opacity:1}
+.title{display:flex;align-items:center;gap:13px;margin-bottom:20px;transform:translateZ(18px)}
+.num{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#071000;font-weight:900;background:linear-gradient(145deg,#d9ff50,#7ca800);box-shadow:0 0 18px rgba(185,255,0,.32);position:relative}
+.num:after{content:"";position:absolute;inset:-5px;border:1px solid rgba(185,255,0,.25);border-radius:18px;animation:pulse 2s infinite}
+.title h2{margin:0;color:var(--white);font-size:1.12rem}
+.item{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.item:last-child{border:0}
+.label{font-size:.78rem;font-weight:800;color:var(--lime2);margin-bottom:8px}
+.value{font-size:.9rem;line-height:2;color:#c5cecf}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.list li{display:flex;gap:10px;padding:11px 12px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);transition:.25s}
+.list li:hover{transform:translateX(-5px);background:rgba(185,255,0,.045);border-color:rgba(185,255,0,.16)}
+.dot{width:7px;height:7px;min-width:7px;margin-top:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 9px var(--lime)}
+.tags{display:flex;flex-wrap:wrap;gap:9px}
+.tag{padding:8px 12px;border-radius:13px;background:rgba(185,255,0,.05);border:1px solid rgba(185,255,0,.17);color:#d8e8a4;font-size:.78rem;font-weight:700;transition:.25s}
+.tag:hover{transform:translateY(-4px) rotate(-2deg);background:rgba(185,255,0,.11);box-shadow:0 0 20px rgba(185,255,0,.14)}
+.contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.contact{padding:13px;border-radius:15px;text-align:center;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.065);transition:.25s}
+.contact:hover{transform:translateY(-5px);border-color:rgba(185,255,0,.25)}
+.contact small{display:block;color:var(--muted);font-size:.68rem;margin-bottom:5px}
+.contact b{color:var(--white);font-size:.78rem;word-break:break-word}
+.timeline{position:relative;padding-right:25px}
+.timeline:before{content:"";position:absolute;right:5px;top:5px;bottom:5px;width:2px;background:linear-gradient(var(--lime),rgba(185,255,0,.05));box-shadow:0 0 8px rgba(185,255,0,.25)}
+.tp{position:relative;padding-bottom:20px}.tp:last-child{padding-bottom:0}
+.tp:before{content:"";position:absolute;right:-25px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px rgba(185,255,0,.07),0 0 15px var(--lime)}
+.software-list{display:grid;gap:9px}
+.software-row{display:grid;grid-template-columns:120px 1fr 65px;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055)}
+.software-name{font-weight:800;color:#dfe7e8;font-size:.8rem;white-space:nowrap}
+.progress{height:9px;border-radius:999px;background:#05090b;box-shadow:inset 2px 2px 6px #000;overflow:hidden}
+.progress-bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#668a00,var(--lime),#efffa9);box-shadow:0 0 12px rgba(185,255,0,.65);animation:loadBar 1.8s var(--ease) both}
+@keyframes loadBar{from{width:0}}
+.level{font-size:.7rem;font-weight:800;text-align:center;white-space:nowrap;color:var(--lime2)}
+.footer{text-align:center;margin-top:25px;color:#667276;font-size:.72rem}
+
+/* decorative motion widgets */
+.floating-orb{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--lime);box-shadow:0 0 18px var(--lime);opacity:.8}
+.orb1{right:8%;top:12%;animation:orb1 6s ease-in-out infinite}.orb2{right:22%;bottom:12%;animation:orb2 8s ease-in-out infinite}
+@keyframes orb1{50%{transform:translate(-35px,70px) scale(.55)}}@keyframes orb2{50%{transform:translate(45px,-50px) scale(1.5)}}
+.progress-label{display:flex;justify-content:space-between;color:#758184;font-size:.68rem;margin:5px 2px 8px}
+.scroll-indicator{display:flex;align-items:center;justify-content:center;gap:8px;color:#6f7b7e;font-size:.68rem;margin:18px 0}
+.scroll-indicator i{display:block;width:28px;height:1px;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:blinkLine 1.5s infinite}
+@keyframes blinkLine{50%{width:55px;opacity:.4}}
+
+@media(max-width:900px){.hero{grid-template-columns:1fr}.profile{min-height:300px}}
+@media(max-width:800px){
+  body{cursor:auto}.cursor,.cursor-ring{display:none}
+  .grid{grid-template-columns:1fr}.card.full{grid-column:auto}.contacts{grid-template-columns:1fr}
+  .wrap{width:94%;padding-top:14px}.hero{padding:23px;min-height:auto}
+  h1{font-size:clamp(3rem,15vw,5rem);letter-spacing:-3px}
+
+  /* Mobile navigation bar */
+  .motion-nav{
+    position:fixed;
+    top:auto;
+    bottom:16px;
+    left:50%;
+    transform:translateX(-50%);
+    width:max-content;
+    max-width:calc(100vw - 24px);
+    margin:0;
+    padding:6px;
+    gap:0;
+    border-radius:9999px;
+    background:rgba(248,251,252,.92);
+    border:1px solid rgba(11,52,70,.10);
+    box-shadow:0 16px 36px -10px rgba(10,49,92,.15);
+    backdrop-filter:blur(18px);
+  }
+
+  .motion-logo,
+  .motion-nav > div > .live-dot{
+    display:none;
+  }
+
+  .motion-nav > div{
+    width:100%;
+  }
+
+  .motion-nav nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    width:100%;
+  }
+
+  .motion-nav a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    padding:0 11px;
+    border-radius:9999px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:700;
+    white-space:nowrap;
+    transition:all .3s cubic-bezier(.25,1,.5,1);
+  }
+
+  .motion-nav a:hover{
+    color:var(--blue);
+    background:rgba(22,79,102,.06);
+  }
+
+  .motion-nav a.active{
+    color:#fff;
+    background:linear-gradient(135deg,#164f66 0%,#0b3446 100%);
+    box-shadow:0 6px 16px rgba(11,52,70,.18);
+  }
+
+  .software-row{grid-template-columns:100px 1fr 58px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ===== Palette adapted from file 1 — structure and motion preserved ===== */
+:root{
+  --bg:#f3f7f9;
+  --navy:#0b3446;
+  --blue:#164f66;
+  --text:#20343e;
+  --muted:#71818a;
+  --white:#ffffff;
+  --lime:#164f66;
+  --lime2:#0b3446;
+  --cyan:#164f66;
+  --purple:#164f66;
+}
+
+body{
+  color:var(--text);
+  background:
+    radial-gradient(circle at var(--mx,50%) var(--my,20%),rgba(217,231,236,.65),transparent 20%),
+    radial-gradient(circle at 80% 70%,rgba(219,232,237,.7),transparent 25%),
+    linear-gradient(135deg,#f3f7f9,#fff 48%,#edf3f5);
+  cursor:none;
+}
+
+body:before{
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(11,52,70,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,52,70,.045) 1px,transparent 1px);
+}
+
+body:after{
+  background:linear-gradient(transparent 50%,rgba(22,79,102,.018) 50%);
+  opacity:.16;
+}
+
+.cursor{
+  background:var(--blue);
+  box-shadow:0 0 18px rgba(22,79,102,.45),0 0 45px rgba(22,79,102,.18);
+}
+.cursor-ring{
+  border-color:rgba(22,79,102,.45);
+  mix-blend-mode:multiply;
+}
+.cursor-ring.active{border-color:var(--blue)}
+
+.shape{
+  opacity:.34;
+  filter:drop-shadow(0 0 18px rgba(11,52,70,.12));
+}
+.c{background:radial-gradient(circle at 30% 30%,#fff,#dce8ec 48%,#c8d9df)}
+.s{background:linear-gradient(145deg,#e7f0f3,#c9dce2)}
+.r{border-color:rgba(22,79,102,.28);box-shadow:0 0 35px rgba(22,79,102,.10)}
+
+.motion-nav{
+  border-color:rgba(11,52,70,.10);
+  background:rgba(248,251,252,.78);
+  box-shadow:0 12px 40px rgba(11,52,70,.12);
+}
+.motion-logo{color:var(--navy)}
+.motion-logo i{background:var(--blue);box-shadow:0 0 18px rgba(22,79,102,.35)}
+.motion-nav a{color:var(--muted)}
+.motion-nav a:hover{color:var(--blue);background:rgba(22,79,102,.06)}
+.live-dot{background:var(--blue);box-shadow:0 0 12px rgba(22,79,102,.5)}
+
+.hero{
+  background:linear-gradient(135deg,rgba(248,251,252,.96),rgba(237,243,245,.98));
+  border-color:rgba(255,255,255,.95);
+  box-shadow:14px 14px 32px #d7e0e4,-12px -12px 30px #fff,inset 0 1px rgba(255,255,255,.85);
+}
+.hero:before{
+  background:conic-gradient(from 0deg,transparent,rgba(22,79,102,.08),transparent 18%,rgba(11,52,70,.045),transparent 38%);
+}
+.hero:after{
+  background:radial-gradient(circle at 15% 20%,rgba(22,79,102,.06),transparent 22%),linear-gradient(120deg,transparent 60%,rgba(22,79,102,.035));
+}
+.badge{
+  color:var(--navy);
+  border-color:rgba(22,79,102,.18);
+  background:rgba(22,79,102,.055);
+  box-shadow:0 0 20px rgba(22,79,102,.06);
+}
+.badge:before{background:var(--blue);box-shadow:0 0 12px rgba(22,79,102,.45)}
+h1{color:var(--navy);text-shadow:0 0 35px rgba(11,52,70,.08)}
+h1:after{background:var(--blue);box-shadow:0 0 12px rgba(22,79,102,.35),0 0 40px rgba(22,79,102,.14)}
+.hero p{color:var(--muted)}
+.meta-pill{
+  border-color:rgba(11,52,70,.09);
+  color:var(--muted);
+  background:rgba(255,255,255,.5);
+}
+.meta-pill b{color:var(--blue)}
+
+.profile{
+  background:radial-gradient(circle at 50% 35%,rgba(22,79,102,.10),transparent 25%),linear-gradient(145deg,#fff,#e7eff2);
+  border-color:rgba(255,255,255,.95);
+}
+.profile:before,.profile:after{border-color:rgba(22,79,102,.18)}
+.avatar-frame{
+  background:linear-gradient(145deg,#164f66,#0b3446);
+  box-shadow:0 0 25px rgba(22,79,102,.28);
+}
+.avatar{background:linear-gradient(145deg,#fff,#d9e6eb);color:var(--navy)}
+.scan-line{background:linear-gradient(90deg,transparent,var(--blue),transparent);box-shadow:0 0 12px rgba(22,79,102,.45)}
+
+.card{
+  background:rgba(248,251,252,.88);
+  border-color:rgba(255,255,255,.95);
+  box-shadow:14px 14px 32px #d7e0e4,-12px -12px 30px #fff,inset 0 1px rgba(255,255,255,.85);
+}
+.card:after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(22,79,102,.08),transparent 24%)}
+.num{
+  color:#fff;
+  background:linear-gradient(145deg,var(--blue),var(--navy));
+  box-shadow:7px 7px 15px #ccd8dd,-5px -5px 12px #fff;
+}
+.num:after{border-color:rgba(22,79,102,.18)}
+.title h2{color:var(--navy)}
+.item{border-bottom-color:#dce5e8}
+.label{color:var(--navy)}
+.value{color:var(--text)}
+.list li{
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(224,237,242,.94));
+  border-color:rgba(255,255,255,.96);
+}
+.list li:hover{background:rgba(22,79,102,.045);border-color:rgba(22,79,102,.14)}
+.dot{background:var(--blue);box-shadow:0 0 9px rgba(22,79,102,.4)}
+.tag{
+  background:linear-gradient(145deg,#fff,#e5f0f4);
+  border-color:rgba(255,255,255,.95);
+  color:var(--navy);
+  box-shadow:7px 7px 15px rgba(11,52,70,.10),-6px -6px 13px #fff,inset 1px 1px 2px #fff;
+}
+.tag:hover{background:rgba(22,79,102,.08);box-shadow:0 0 20px rgba(22,79,102,.10)}
+.contact{
+  background:linear-gradient(145deg,#fff,#e1edf1);
+  border-color:rgba(255,255,255,.95);
+}
+.contact:hover{border-color:rgba(22,79,102,.20)}
+.contact b{color:var(--navy)}
+.timeline:before{background:linear-gradient(var(--blue),#dce8ec);box-shadow:none}
+.tp:before{background:var(--blue);box-shadow:0 0 0 5px #e0edf1,0 0 15px rgba(22,79,102,.3)}
+.software-row{
+  background:linear-gradient(145deg,#fff,#e5eff3);
+  border-color:rgba(255,255,255,.96);
+}
+.software-name{color:var(--navy)}
+.progress{background:#dce6ea;box-shadow:inset 3px 3px 7px rgba(11,52,70,.14),inset -2px -2px 5px #fff}
+.progress-bar{background:linear-gradient(90deg,#164f66,#0b3446,#71818a);box-shadow:0 0 10px rgba(22,79,102,.25)}
+.level{color:var(--navy)}
+.footer{color:var(--muted)}
+.floating-orb{background:var(--blue);box-shadow:0 0 18px rgba(22,79,102,.4)}
+.progress-label{color:var(--muted)}
+.scroll-indicator{color:var(--muted)}
+.scroll-indicator i{background:var(--blue);box-shadow:0 0 10px rgba(22,79,102,.35)}
+
+
+/* === Final interaction + profile glow adjustment === */
+body{cursor:auto !important}
+a,.tag,.contact,.num{cursor:pointer}
+body{--mx:50%;--my:20%}
+
+/* Profile image glow: petrol blue instead of green */
+.profile{
+  background:
+    radial-gradient(circle at 50% 35%,rgba(22,79,102,.13),transparent 25%),
+    linear-gradient(145deg,#fff,#e7eff2) !important;
+}
+.profile:before,.profile:after{
+  border-color:rgba(22,79,102,.22) !important;
+}
+.profile:before{
+  box-shadow:0 0 45px rgba(22,79,102,.12) !important;
+}
+.avatar-frame{
+  background:linear-gradient(145deg,#164f66,#0b3446) !important;
+  box-shadow:0 0 25px rgba(22,79,102,.34) !important;
+}
+@keyframes avatarFloat{
+  50%{
+    transform:translateY(-9px) rotate(2deg);
+    box-shadow:0 0 42px rgba(22,79,102,.48) !important;
+  }
+}
+.avatar{
+  background:linear-gradient(145deg,#fff,#d9e6eb) !important;
+}
+.scan-line{
+  background:linear-gradient(90deg,transparent,#164f66,transparent) !important;
+  box-shadow:0 0 12px rgba(22,79,102,.45) !important;
+}
+
+
+    .course-heading {
+      margin-top: 22px;
+      margin-bottom: 10px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(22, 79, 102, 0.14);
+    }
+
+    .course-heading .label {
+      font-weight: 700;
+      color: var(--navy, #0b3446);
+    }
+
+  </style>
+<style>
+html,body,body *,button,input,textarea,select,option,h1,h2,h3,h4,h5,h6,p,span,div,a,li,small,b,strong{font-family:'Shabnam',sans-serif!important;}
+
+/* ===== Contact section redesign ===== */
+#contact{
+  grid-column:1/-1;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(22,79,102,.10),transparent 26%),
+    radial-gradient(circle at 92% 88%,rgba(113,129,138,.10),transparent 28%),
+    linear-gradient(145deg,#ffffff,#e7eff3);
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:16px 16px 36px rgba(11,52,70,.10),-12px -12px 30px #fff,inset 0 1px rgba(255,255,255,.95);
+}
+
+#contact:before{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  left:-120px;bottom:-170px;
+  border:1px solid rgba(22,79,102,.10);
+  border-radius:50%;
+  box-shadow:0 0 0 28px rgba(22,79,102,.025),0 0 0 56px rgba(22,79,102,.018);
+  pointer-events:none;
+}
+
+#contact:after{
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(22,79,102,.10),transparent 28%);
+}
+
+#contact .title{
+  position:relative;
+  z-index:2;
+  margin-bottom:18px;
+}
+
+#contact .title h2{
+  color:var(--navy);
+}
+
+#contact .num{
+  background:linear-gradient(145deg,#164f66,#0b3446);
+  color:#fff;
+  box-shadow:0 10px 24px rgba(11,52,70,.22);
+}
+
+#contact .num:after{
+  border-color:rgba(22,79,102,.16);
+}
+
+.contact-intro{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:18px;
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(22,79,102,.08);
+}
+
+.contact-intro-text strong{
+  display:block;
+  color:var(--navy);
+  font-size:.95rem;
+  margin-bottom:5px;
+}
+
+.contact-intro-text span{
+  display:block;
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.8;
+}
+
+.contact-status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  flex:none;
+  padding:8px 11px;
+  border-radius:999px;
+  color:var(--blue);
+  background:rgba(22,79,102,.055);
+  border:1px solid rgba(22,79,102,.12);
+  font-size:.68rem;
+  font-weight:800;
+}
+
+.contact-status i{
+  width:7px;height:7px;border-radius:50%;
+  background:#3a9b70;
+  box-shadow:0 0 0 5px rgba(58,155,112,.10),0 0 12px rgba(58,155,112,.35);
+  animation:pulse 1.8s infinite;
+}
+
+.contact-grid{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.contact-card{
+  position:relative;
+  min-height:145px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:16px;
+  border-radius:20px;
+  text-decoration:none;
+  overflow:hidden;
+  background:linear-gradient(145deg,#fff,#e6eef2);
+  border:1px solid rgba(255,255,255,.98);
+  box-shadow:8px 8px 18px rgba(11,52,70,.09),-7px -7px 16px #fff;
+  transition:transform .3s cubic-bezier(.2,.75,.2,1),box-shadow .3s,border-color .3s;
+}
+
+.contact-card:before{
+  content:"";
+  position:absolute;
+  width:100px;height:100px;
+  left:-35px;top:-42px;
+  border-radius:50%;
+  background:rgba(22,79,102,.055);
+  transition:transform .35s,background .35s;
+}
+
+.contact-card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(22,79,102,.18);
+  box-shadow:12px 16px 28px rgba(11,52,70,.13),-8px -8px 18px #fff;
+}
+
+.contact-card:hover:before{
+  transform:scale(1.45);
+  background:rgba(22,79,102,.09);
+}
+
+.contact-card-top{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.contact-icon{
+  width:42px;height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  color:#fff;
+  background:linear-gradient(145deg,#164f66,#0b3446);
+  box-shadow:0 8px 18px rgba(11,52,70,.20);
+  font-size:1.05rem;
+}
+
+.contact-arrow{
+  color:#9aa9af;
+  font-size:1rem;
+  transition:transform .3s,color .3s;
+}
+
+.contact-card:hover .contact-arrow{
+  transform:translateX(-4px);
+  color:var(--blue);
+}
+
+.contact-card small{
+  position:relative;
+  display:block;
+  margin-top:13px;
+  margin-bottom:5px;
+  color:var(--muted);
+  font-size:.68rem;
+}
+
+.contact-card b{
+  position:relative;
+  display:block;
+  color:var(--navy);
+  font-size:.83rem;
+  word-break:break-word;
+}
+
+.contact-card .contact-note{
+  position:relative;
+  display:block;
+  margin-top:5px;
+  color:#91a0a6;
+  font-size:.62rem;
+}
+
+.contact-direct{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  margin-top:13px;
+  padding:10px 14px;
+  border-radius:14px;
+  color:#fff;
+  background:linear-gradient(135deg,#164f66,#0b3446);
+  box-shadow:0 9px 18px rgba(11,52,70,.18);
+  text-decoration:none;
+  font-size:.72rem;
+  font-weight:800;
+  transition:transform .25s,box-shadow .25s;
+}
+
+.contact-direct:hover{
+  transform:translateY(-3px);
+  box-shadow:0 13px 24px rgba(11,52,70,.24);
+}
+
+@media(max-width:800px){
+  #contact{grid-column:auto}
+  .contact-intro{align-items:flex-start;flex-direction:column}
+  .contact-status{align-self:flex-start}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-card{min-height:132px}
+}
+
+</style></head>
+
+<body>
+
+<canvas id="particles"></canvas>
+<nav class="motion-nav">
+  <div class="motion-logo"><i></i><span>فرم رزومه</span></div>
+  <div style="display:flex;align-items:center;gap:4px">
+    <span class="live-dot"></span>
+    <nav>
+      <a href="#about" class="active">درباره من</a>
+      <a href="#experience">سوابق کاری</a>
+      <a href="#skills">مهارت ها</a>
+      <a href="#contact">راه ارتباطی</a>
+    </nav>
+  </div>
+</nav>
+
+
+<div class="bg">
+  <i class="shape c p1"></i>
+  <i class="shape s p2"></i>
+  <i class="shape r p3"></i>
+  <i class="shape c p4"></i>
+  <i class="shape s p5"></i>
+  <i class="shape r p6"></i>
+  <i class="shape triangle p7"></i>
+</div>
+
+<main class="wrap">
+
+<section class="hero" id="about">
+  <div>
+    <span class="badge"> رزومه الکترونیک </span>
+    <h1>عارف باقری</h1>
+    <p>
+      طراح گرافیک و علاقه‌مند به تولید محتوای بصری و مدیریت شبکه‌های اجتماعی،
+      با تمرکز بر رشد حرفه‌ای، یادگیری مستمر و خلق محتوای خلاقانه.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-pill"><b>●</b> Graphic Design</span>
+      <span class="meta-pill"><b>●</b> Content Creation</span>
+      <span class="meta-pill"><b>●</b> Social Media</span>
+    </div>
+  </div>
+
+    <div class="profile">
+      <span class="scan-line"></span><i class="floating-orb orb1"></i><i class="floating-orb orb2"></i>
+    <div class="avatar-frame"><div class="avatar">
+      <img src="image.png" alt="عارف باقری" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <span style="display:none;">AB</span>
+    </div></div>
+  </div>
+</section>
+<div class="scroll-indicator"><i></i><span>برای مشاهده جزئیات بیشتر، اسکرول کنید</span><i></i></div>
+
+<section class="grid">
+
+<article class="card reveal">
+  <div class="title"><div class="num">01</div><h2>معرفی و اطلاعات فردی</h2></div>
+
+  <div class="item">
+    <div class="label">✦ نام و نام خانوادگی</div>
+    <div class="value">عارف باقری</div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ سن / تاریخ تولد</div>
+    <div class="value">۱۸ سال — متولد ۱۳۸۶/۰۸/۱۰</div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ محل سکونت</div>
+    <div class="value">استان اصفهان — شهر اصفهان</div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ وضعیت نظام‌وظیفه</div>
+    <div class="value">معافیت تحصیلی</div>
+  </div>
+
+
+  <div class="item">
+    <div class="label">✦ تحصیلات</div>
+    <div class="value">دیپلم - دانشجو</div>
+  </div>
+
+    <div class="item">
+      <div class="label">✦ دوره های گذرانده شده</div>
+      <div class="value">
+                <ul class="list">
+          <li><span class="dot"></span><span><div class="label">دوره‌های ادمینی</div>
+    <div class="value">دوره ادمینی — نیلماه (آکادمی نوا)</div>
+  </div></span></li>
+        </ul>
+
+      <div class="value">
+        <ul class="list">
+          <li><span class="dot"></span><span><div class="label">دوره‌های طراحی</div>
+    <div class="value">دوره فتوشاپ — فوتوفن (کافه آرتک)</div>
+  </div></span></li>
+        </ul>
+      </div>
+
+</article>
+
+<article class="card reveal" id="experience">
+  <div class="title"><div class="num">02</div><h2>سوابق کاری و پروژه‌ای</h2></div>
+
+  <div class="timeline">
+    <div class="tp">
+      <div class="label">✦ هولدینگ هاترا | بخش تبلیغات</div>
+      <div class="value">
+        <ul class="list">
+          <li><span class="dot"></span><span>حدود ۴ ماه فعالیت در بخش تبلیغات</span></li>
+          <li><span class="dot"></span><span>طراحی پست و استوری</span></li>
+          <li><span class="dot"></span><span>طراحی پوستر، بروشور، کاتالوگ و کارت ویزیت</span></li>
+          <li><span class="dot"></span><span>همکاری در طراحی رابط کاربری وب‌سایت (UI)</span></li>
+          <li><span class="dot"></span><span>جست‌وجو و بررسی رفرنس و ایده برای طراحی</span></li>
+          <li><span class="dot"></span><span>هماهنگی با تیم و اعمال اصلاحات بر اساس بازخورد</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tp">
+      <div class="label">✦ تجربه پروژه‌ای طراحی پوستر</div>
+      <div class="value">
+        <ul class="list">
+          <li><span class="dot"></span><span>انجام  4 پروژه طراحی پوستر</span></li>
+          <li><span class="dot"></span><span>انجام 3 پروژه طراحی برای کنسرت‌های آموزشگاه‌های موسیقی</span></li>
+          <li><span></span><span>پروژه‌ها مربوط به سال‌های گذشته هستند و نمونه‌کار آن‌ها در دسترس نیست</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card reveal" id="skills">
+  <div class="title"><div class="num">03</div><h2>مهارت‌ها و نرم‌افزارها</h2></div>
+
+  <div class="item">
+    <div class="label">✦ طراحی و نرم‌افزار</div>
+    <div class="software-list">
+
+      <div class="software-row">
+        <span class="software-name">Adobe Photoshop</span>
+        <div class="progress"><div class="progress-bar" style="width:85%"></div></div>
+        <span class="level">8.5 / 10</span>
+      </div>
+
+      <div class="software-row">
+        <span class="software-name">هوش مصنوعی</span>
+        <div class="progress"><div class="progress-bar" style="width:90%"></div></div>
+        <span class="level">9 / 10</span>
+      </div>
+
+      <div class="software-row">
+        <span class="software-name">Canva</span>
+        <div class="progress"><div class="progress-bar" style="width:60%"></div></div>
+        <span class="level">6 / 10</span>
+      </div>
+
+      <div class="software-row">
+        <span class="software-name">InShot</span>
+        <div class="progress"><div class="progress-bar" style="width:60%"></div></div>
+        <span class="level">6 / 10</span>
+      </div>
+
+      <div class="software-row">
+        <span class="software-name">Adobe Illustrator</span>
+        <div class="progress"><div class="progress-bar" style="width:30%"></div></div>
+        <span class="level">3 / 10</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ سایر مهارت‌های تخصصی</div>
+    <ul class="list">
+      <li><span class="dot"></span><span>طراحی محتوای بصری — خوب</span></li>
+      <li><span class="dot"></span><span>ویرایش تصویر — خوب</span></li>
+      <li><span class="dot"></span><span>اصول طراحی گرافیک — متوسط</span></li>
+      <li><span class="dot"></span><span>طراحی رابط کاربری (UI) — متوسط</span></li>
+
+    </ul>
+  </div>
+
+    <div class="item">
+
+    <div class="label">✦ ویژگی‌های کاری</div>
+
+    <div class="tags">
+
+      <span class="tag">مسئولیت‌پذیر</span>
+      <span class="tag">دقت و نظم</span>
+      <span class="tag">یادگیرنده</span>
+      <span class="tag">جست‌وجوگر</span>
+      <span class="tag">کار تیمی و مستقل</span>
+      <span class="tag">انعطاف‌پذیر</span>
+      <span class="tag">صبور</span>
+      <span class="tag">ایده‌پردازی</span>
+      <span class="tag">حل مسئله و جست‌و‌جو</span>
+
+    </div>
+
+  </div>
+</article>
+
+
+<article class="card reveal">
+  <div class="title"><div class="num">04</div><h2>تولید محتوا و ادمینی</h2></div>
+
+  <div class="item">
+    <div class="label">✦ تولید محتوا</div>
+    <ul class="list">
+      <li><span class="dot"></span><span>طراحی پست و استوری</span></li>
+      <li><span class="dot"></span><span>تولید محتوای گرافیکی</span></li>
+      <li><span class="dot"></span><span>نوشتن کپشن و متن تبلیغاتی</span></li>
+      <li><span class="dot"></span><span>ایده‌پردازی و پیدا کردن رفرنس</span></li>
+      <li><span class="dot"></span><span>برنامه‌ریزی و دسته‌بندی ساده محتوا</span></li>
+      <li><span class="dot"></span><span>استفاده از هوش مصنوعی برای تولید محتوای متنی و بصری</span></li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ ادمینی</div>
+    <ul class="list">
+      <li><span class="dot"></span><span>انتشار پست، استوری و ریلز</span></li>
+      <li><span class="dot"></span><span>تنظیم کپشن، هشتگ، تگ، لوکیشن و کاور</span></li>
+      <li><span class="dot"></span><span>پاسخ‌گویی به دایرکت و کامنت</span></li>
+      <li><span class="dot"></span><span>پاسخ به سؤالات و درخواست‌های مخاطبان</span></li>
+      <li><span class="dot"></span><span>مدیریت محتوای مناسبتی و تعاملی</span></li>
+      <li><span class="dot"></span><span>هماهنگی و انتشار محتوا در پلتفرم‌های مختلف</span></li>
+    </ul>
+  </div>
+
+    <div class="item">
+    <div class="label">✦ سناریونویسی </div>
+    <ul class="list">
+      <li><span class="dot"></span><span>در حال یادگیری</span></li>
+
+    </ul>
+  </div>
+
+</article>
+
+<article class="card reveal">
+  <div class="title"><div class="num">05</div><h2>وضعیت و شرایط همکاری</h2></div>
+
+  <div class="item">
+    <div class="label">✦ وضعیت همکاری</div>
+    <div class="value">آماده شروع همکاری و پذیرش فرصت‌های شغلی جدید</div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ نوع همکاری موردنظر</div>
+    <div class="value">پاره‌وقت، پروژه‌ای و دورکاری</div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ زمان قابل فعالیت</div>
+    <div class="value">امکان همکاری و فعالیت تا حدود ۸ ساعت در روز</div>
+  </div>
+
+  <div class="item">
+    <div class="label">✦ آمادگی همکاری</div>
+    <div class="value">آمادگی فعالیت به‌صورت تیمی یا مستقل و همکاری در محیط‌های کاری آنلاین</div>
+  </div>
+
+
+</article>
+
+<article class="card reveal" id="contact">
+  <div class="title"><div class="num">06</div><h2>راه‌های ارتباطی</h2></div>
+
+  <div class="contact-intro">
+    <div class="contact-intro-text">
+      <span>برای پروژه‌های طراحی، تولید محتوا و ادمینی می‌توانید از یکی از راه‌های زیر با من در ارتباط باشید.</span>
+    </div>
+    <div class="contact-status"><i></i> آماده همکاری</div>
+  </div>
+
+  <div class="contact-grid">
+    <a class="contact-card" href="tel:09919640393" aria-label="تماس با عارف باقری">
+      <div class="contact-card-top">
+        <span class="contact-icon">☎</span>
+        <span class="contact-arrow">←</span>
+      </div>
+      <div>
+        <small>تماس مستقیم</small>
+        <b>۰۹۹۱۹۶۴۰۳۹۳</b>
+        <span class="contact-note">برای تماس تلفنی</span>
+      </div>
+    </a>
+
+    <a class="contact-card" href="https://t.me/Arefbagheri" target="_blank" rel="noopener" aria-label="تلگرام عارف باقری">
+      <div class="contact-card-top">
+        <span class="contact-icon">✈</span>
+        <span class="contact-arrow">←</span>
+      </div>
+      <div>
+        <small>Telegram</small>
+        <b>@Arefbagheri</b>
+        <span class="contact-note">ارسال پیام در تلگرام</span>
+      </div>
+    </a>
+
+    <a class="contact-card" href="https://instagram.com/ornios.graphic" target="_blank" rel="noopener" aria-label="اینستاگرام عارف باقری">
+      <div class="contact-card-top">
+        <span class="contact-icon">◎</span>
+        <span class="contact-arrow">←</span>
+      </div>
+      <div>
+        <small>Instagram</small>
+        <b>@ornios.graphic</b>
+        <span class="contact-note">مشاهده صفحه اینستاگرام</span>
+      </div>
+    </a>
+  </div>
+
+  <a class="contact-direct" href="sms:09919640393">
+    <span>✦</span>
+    <span>شروع یک گفت‌وگوی کاری</span>
+    <span>←</span>
+  </a>
+</article>
+
+<article class="card full reveal">
+  <div class="title"><div class="num">07</div><h2>توضیحات تکمیلی</h2></div>
+
+  <div class="value" style="font-size:1rem;line-height:2.35">
+    طراح گرافیک و علاقه‌مند به تولید محتوای بصری و مدیریت شبکه‌های اجتماعی هستم و تجربه فعالیت در بخش تبلیغات و طراحی انواع محتوای گرافیکی را دارم. در زمینه طراحی پست، استوری، پوستر، بروشور، کاتالوگ و کارت ویزیت تجربه دارم و با طراحی رابط کاربری (UI) نیز آشنایی نسبتاَ خوبی دارم. فردی مسئولیت‌پذیر، دقیق، منظم و یادگیرنده هستم و توانایی کار به‌صورت تیمی و مستقل را دارم. در انجام وظایف پیگیر هستم و برای حل مسائل ابتدا اطلاعات لازم را از کارفرما یا اعضای تیم دریافت کرده، سپس با جست‌وجو و یادگیری موضوع را دنبال می‌کنم. در صورت نیاز از راهنمایی افراد باتجربه استفاده کرده و بازخوردها را در روند کار اعمال می‌کنم. هدفم کسب تجربه بیشتر، توسعه مهارت‌ها و پیدا کردن یک موقعیت شغلی مناسب برای رشد و پیشرفت حرفه‌ای در حوزه طراحی و تولید محتوا و ادمینی است.
+  </div>
+</article>
+
+</section>
+
+<div class="footer">
+  • رزومه الکترونیک عارف باقری •
+</div>
+
+</main>
+
+<script>
+  document.querySelectorAll('.motion-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelectorAll('.motion-nav a').forEach(item => {
+        item.classList.remove('active');
+      });
+      link.classList.add('active');
+    });
+  });
+(() => {
+  const root=document.documentElement;
+
+  // Interactive spotlight + custom cursor
+  const hero=document.querySelector('.hero');
+  const mobileQuery=matchMedia('(max-width:800px)');
+  let px=innerWidth/2,py=innerHeight/2;
+
+  window.addEventListener('pointermove', e=>{
+    root.style.setProperty('--mx', e.clientX+'px');
+    root.style.setProperty('--my', e.clientY+'px');
+    px=e.clientX;
+    py=e.clientY;
+
+    if(hero && !matchMedia('(max-width:800px)').matches){
+      const x=e.clientX/innerWidth-.5;
+      const y=e.clientY/innerHeight-.5;
+      hero.style.backgroundPosition=`${50+x*2}% ${50+y*2}%`;
+    }
+  },{passive:true});
+
+  // Scroll reveal
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach((entry,i)=>{
+      if(entry.isIntersecting){
+        setTimeout(()=>entry.target.classList.add('visible'), i*70);
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // 3D card tilt removed: keeps card content sharp and stable under the mouse.
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      if(mobileQuery.matches) return;
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.setProperty('--gx',`${(x+.5)*100}%`);
+      card.style.setProperty('--gy',`${(y+.5)*100}%`);
+    });
+  });
+
+  // Particle field
+  const canvas=document.getElementById('particles'), ctx=canvas.getContext('2d');
+  let w,h,pts=[];
+  const resize=()=>{w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)};
+  const init=()=>{pts=Array.from({length:Math.min(75,Math.floor(innerWidth/18))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.6+.4}))};
+  resize();init();addEventListener('resize',()=>{resize();init()});
+  function draw(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    for(const p of pts){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>innerWidth)p.vx*=-1;
+      if(p.y<0||p.y>innerHeight)p.vy*=-1;
+      const dx=p.x-px,dy=p.y-py,d=Math.hypot(dx,dy);
+      const alpha=Math.max(.08,.38-d/500);
+      ctx.fillStyle=`rgba(22,79,102,${alpha})`;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+      if(d<145){
+        ctx.strokeStyle=`rgba(22,79,102,${.10*(1-d/145)})`;
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(px,py);ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+</body>
+</html>
